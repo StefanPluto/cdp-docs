@@ -1,0 +1,37 @@
+# Sending Events
+
+For the StopChurn system to be able to continiously get information about the latest events triggered by the users on your platform,
+you will need to send these events via an API call to the StopChurn API.
+
+## Event Data
+
+The required data of an event consists of the following properties:
+
+- `brandId` - The unique identifier of the brand within the StopChurn API.
+- `userId` - The userId as the unique identifierof the user that has fired that event.
+- `name` - The unique name of the event as defined in the custom event creation page.
+- `value` - **Optional**, if the fired event had a value attached to it, it should be sent alongside the event, of the same type as defined in the Custom Event table.
+
+## Sending Event Data Example
+
+```json
+{
+  "data": [
+    {
+      "brandId": 1,
+      "userId": "553",
+      "name": "ORDER_INITIATED"
+    },
+    {
+      "brandId": 1,
+      "userId": "443",
+      "name": "CHALLENGE_ENTERED",
+      "value": 4000
+    }
+  ]
+}
+```
+
+- The data should be sent onto the `/client-data/event` using the POST method, 
+with the standard authorization mentioned at the start of the documentation.
+- As seen above the data object is an array of events, which means that you are able to either send one or more events at the same time.

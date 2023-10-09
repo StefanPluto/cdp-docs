@@ -1,0 +1,90 @@
+# Database Synchronization
+
+Before you start sending out events and user updates, we firstly need to integrate historical data into the StopChurn system,
+as it needs to be aware of all of your existing data, so then you are able to segment and filter users properly.
+
+## Uploading Files
+
+As we have previously created our table definitions we now need to extract the historical data in the same format as the table definitions.
+Each document should also contain a few additional fields.
+
+- Example:
+
+```js
+{
+  data: {
+    id: 123,
+    email: 'john@doe.com',
+    phone: '+381638538392',
+    marketingPreferences: {
+         email: true,
+         phone: true
+     },
+     systemPreferences: {
+         email: false,
+         phone: true
+     },
+     firstName: 'John',
+     lastName: 'Doe',
+     city: 'Limassol',
+  },
+  createdAt: 1696814606, // Time of document creation
+  updatedAt: 1696821819  // Time when the document was updated
+}
+```
+
+- All that needs to be done is extract the data that you wish into json files (**up to 2GB per file**), which will contain historical data of your documents.
+  Make sure to keep the data within each document tied to **one table** and **one brand**,
+  as you will be selecting the table and brand for each document that you upload via the Back Office.
+
+- An example of a 'user' table json:
+
+```json
+[
+  {
+    "data": {
+      "id": 123,
+      "email": "john@doe.com",
+      "phone": "+381638538392",
+      "marketingPreferences": {
+        "email": true,
+        "phone": true
+      },
+      "systemPreferences": {
+        "email": false,
+        "phone": true
+      },
+      "firstName": "John",
+      "lastName": "Doe",
+      "city": "Limassol"
+    },
+    "createdAt": 1696814606,
+    "updatedAt": 1696821819
+  },
+  {
+    "data": {
+      "id": 123,
+      "email": "mark@zoe.com",
+      "phone": "+381638538393",
+      "marketingPreferences": {
+        "email": true,
+        "phone": true
+      },
+      "systemPreferences": {
+        "email": false,
+        "phone": true
+      },
+      "firstName": "Mark",
+      "lastName": "Zoe",
+      "city": "Larnaka"
+    },
+    "createdAt": 1696821920,
+    "updatedAt": 1696822606
+  }
+]
+```
+
+- You can attach as many files as you need for the synchronization process, all you need to do is navigate to `Database > Sync Database`.
+- Once you reach the page you will need to firstly upload your json files via the json uploader, then once you are ready click on the 'Sync With DB' and wait for the integration process to finish.
+
+![Sync DB](images/database-sync.gif)

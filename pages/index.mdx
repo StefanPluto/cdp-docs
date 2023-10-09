@@ -1,11 +1,14 @@
-# Introduction
- 
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
+# StopChurn
 
-## What is Nextra?
+Welcome to StopChurn, a system designed as a fully agnostic solution for your customer data needs.
+It enables the creation of custom entities, events and bonuses within the system with just a few clicks.
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+## Before you start
 
-## Documentation
+Before using the StopChurn API you will need a way to authenticate with the API. Currently there is only one way to do so, which involves utilizing an `API Key`.
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+The `API Key` identifies you as a client, and should be sent with any request made to the platform inside the headers as:
+
+- `Authorization: 'Bearer {{API_KEY}}'`
+
+**API keys should never be used in a non-backend environment. It is your responsibility to keep your key safe.**

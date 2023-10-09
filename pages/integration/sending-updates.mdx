@@ -1,0 +1,59 @@
+# Sending Updates
+
+For the StopChurn system to be able to continiously get information about the latest updates to the tables that you have defined earlier
+you will need to send these updates via an API call to the StopChurn API.
+
+## Update Data
+
+The required data of an event consists of the following properties:
+
+- `type` - The type of the update, which can be either `insert`, `update` or `delete`.
+- `data` - The data sent in the same format as when integrating the data for the first time,
+with the note that every time this update is sent it needs to contain all of the data that the table definition has, no matter the update type.
+
+## Sending Update Data Example
+
+```json
+{
+  "data": [
+    {
+      "type": "insert",
+      "data": {
+        "brandId": 1,
+        "tableName": "user",
+        "data": {
+          "id": "1",
+          "email": "test123@gmail.com",
+          "firstName": "pera",
+          "lastName": "peric",
+          "nickname": "perke",
+          "status": "active",
+        },
+        "createdAt": 1694357675, // Time of document creation
+        "updatedAt": 1694357675 // Time when the document was updated
+      }
+    },
+    {
+      "type": "update",
+      "data": {
+        "brandId": 1,
+        "tableName": "user",
+        "data": {
+          "id": "2",
+          "email": "test456@gmail.com",
+          "firstName": "mika",
+          "lastName": "mikic",
+          "nickname": "mikica",
+          "status": "active",
+        },
+        "createdAt": 1694357675,
+        "updatedAt": 1694357675
+      }
+    }
+  ]
+}
+```
+
+- The data should be sent onto the `/client-data/update` route using the POST method,
+  with the standard authorization mentioned at the start of the documentation.
+- As seen above the data object is an array of updates, which means that you are able to either send one or more updates at the same time.

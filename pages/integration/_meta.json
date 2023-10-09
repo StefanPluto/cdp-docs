@@ -1,0 +1,9 @@
+{
+  "custom-tables": "Custom Tables",
+  "custom-events": "Custom Events",
+  "custom-bonuses": "Custom Bonuses",
+  "database-syncronization": "DB Synchronization",
+  "sending-events": "Sending Events",
+  "sending-updates": "Sending Updates",
+  "webhooks": "Webhooks"
+}

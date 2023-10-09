@@ -1,0 +1,63 @@
+# Custom Tables
+
+Before being able to segment users or incorporate them into journeys, it's essential to define our tables first. Each table definition is fully customizable, with the exception of the User table. Every client is required to have a table named 'user', which is predetermined as the default main table in the definition process.
+
+## User Table
+
+The 'user' table contains some mandatory fields, crucial for the system's capability to dispatch emails, SMS messages, and push notifications.
+
+### Required Properties
+
+```js
+{
+  id: string | number;
+  email: string;
+  phone: string;
+  marketingPreferences: object;
+  systemPreferences: object;
+}
+```
+
+- Both Marketing Preferences and System Preferences are mandatory objects, each encompassing the following attributes:
+
+```js
+marketingPreferences: {
+    email: boolean,
+    phone: boolean
+}
+
+systemPreferences: {
+    email: boolean,
+    phone: boolean
+}
+```
+
+**You're at liberty to augment and personalize all additional properties of the user table as per your prerequisites.**
+
+## Other Tables
+
+The creation and customization of all other tables are under your discretion. However, it's imperative for every table to incorporate an id field, serving as the identifier of the entity within your system.
+
+### Creating Table Definitions
+
+1. Navigate to `Database > Table Definitions` on the Back Office platform.
+2. The Table Definitions screen allows the addition and modification of new definitions within the Table Definition Canvas.
+
+![Table Canvas](images/customer-table-canvas.png)
+
+3. Initiate the table creation process by selecting a pre-existing table on the canvas, followed by clicking the 'Add Table' button.
+
+![Add Table](images/how-to-add-table-definition.gif)
+
+4. Post creation, you can incorporate new attributes, associate the table with a parent table, and determine which attributes will serve as the foreign key of the parent table.
+
+![Customize Table](images/customize-table-definition.gif)
+
+### Editing Table Definitions
+
+To amend an existing table:
+
+1. Select it on the canvas; this action renders its attributes editable.
+2. Alter the parent table by effortlessly dragging the parent's end of a node to another intended parent.
+
+**Note:** Refrain from modifying table definitions post the synchronization of databases; doing so necessitates redoing the entire database sync from scratch.

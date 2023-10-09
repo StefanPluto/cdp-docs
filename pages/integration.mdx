@@ -1,0 +1,19 @@
+# Integration
+
+**To be able to integrate with the StopChurn system there is a couple of things you need to do first.**
+
+- Log In to the Back Office platform using the provided credentials from our developer team.
+- Create custom table definitions to be able to store data within the StopChurn system.
+- Create custom events and bonuses to be used when creating your user journeys.
+
+**The integration process consists of five steps:**
+
+1. Create custom table definitions, events and bonuses (**custom bonuses are optional**).
+2. Implement the ability to send event and data updates via your API.
+3. Implement the ability to receive webhook calls from the StopChurn system. 
+4. Import historical data by extracting it into JSON files, upload them via the Back Office and synchronize the database.
+5. Start sending events after the sync process, and you are good to go!
+
+##Api Urls
+
+- The base API dev url is 'http://marketplace-api-dev-lb-1039727933.eu-central-1.elb.amazonaws.com'
