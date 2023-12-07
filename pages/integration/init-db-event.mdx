@@ -1,0 +1,25 @@
+# Ongoing database initialization
+
+This endpoint is used to show ongoing database initialization process. It shows a Kafka events for database initialization process in terminal preview.
+
+## Request
+- Method `GET`
+- Header `Authorization`
+- Route `client-data/init-db`
+
+## Response
+- 200 OK - Success
+
+``` text
+Terminal preview of ongoing processes
+```
+
+- 403 Forbidden - Error during database initialization
+
+```json
+{
+    "statusCode": 403,
+    "message": "Invalid token",
+    "error": "Forbidden"
+}
+```

@@ -1,0 +1,57 @@
+# Remove all uploaded tables
+
+You can remove all tables that were uploaded. To remove all defined tables you need to login as client on StopChurn platform and send following request.
+
+## Request
+- Method `DELETE`
+- Header `Authorization`
+- Route `client-data/client-table`
+
+## Response
+- 200 OK - Success
+```json
+{
+   "clientId":"number",
+   "name":"string",
+   "parentTable?":{
+      "name":"string",
+      "foreignKeyName":"string"
+   },
+   "childTables":[
+      {
+         "name":"string",
+         "foreignKeyName":"string"
+      }
+   ],
+   "parameters":{
+      "NUMBER":0,
+      "STRING":1,
+      "BOOLEAN":2,
+      "JSON":3,
+      "DATE":4
+   },
+   "nodePosition":{
+      "x":"number",
+      "y":"number"
+   },
+   "createdAt":"number",
+   "updatedAt":"number|null",
+   "deletedAt":"number|null"
+}
+```
+- 400 Bad Request - Error during removal
+```json
+{
+  "statusCode": 400,
+  "error": "Bad Request",
+  "message": "Error while removing all client tables for clientId 123: YourErrorMessage"
+}
+```
+- 403 Forbidden - Error during database initialization
+```json
+{
+    "statusCode": 403,
+    "message": "Invalid token",
+    "error": "Forbidden"
+}
+```
