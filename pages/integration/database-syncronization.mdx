@@ -88,3 +88,75 @@ Each document should also contain a few additional fields.
 - Once you reach the page you will need to firstly upload your json files via the json uploader, then once you are ready click on the 'Sync With DB' and wait for the integration process to finish.
 
 ![Sync DB](images/database-sync.gif)
+
+## DB Synchonization endpoints
+
+Files could also be sent to the /client-files route using the POST method, with the standard authorization mentioned at the start of the documentation. 
+In the form-data 'files' key should have type 'File' and contain integration JSON files explained in this section.
+The 'data' key should contain array of objects with 'brandId' and 'tableName' properties. Each object of 'data' array should contain brand and table name data for the corresponding integration JSON file. The first object corresponds to the first JSON file etc. 
+
+### Uploading files via endpoint example
+
+![Sync DB](images/file-upload-example.png)
+
+
+### Possible responses for uploading files
+- 200 OK - Success
+```json
+{
+    "statusCode": 200,
+    "message": "Files Uploaded Successfully"
+}
+```
+
+- 206 Partial success - If there were errors regarding JSON format, files with errors will be skipped and their list will be in the response message
+```json
+{
+  "statusCode": 206,
+  "message": "Files uploaded partially, skipped files: SkippedFilesList"
+}
+```
+
+- 401 Unauthorized
+```json
+{
+    "statusCode": 401,
+    "message": "You are not allowed to perform that action",
+    "error": "Unauthorized"
+}
+```
+
+### Triggering data sync
+
+Data sync for all JSON integration files can be triggered by sending GET method request to the /initialize-db route, with the standard authorization mentioned at the start of the documentation.
+
+### Possible responses for Triggering Data sync
+
+- 200 OK - Success
+
+```json
+{
+    "statusCode": 200,
+    "message": "Successfully integrated client data!"
+}
+```
+
+- 401 Unauthorized - Error during database initialization
+
+```json
+{
+    "statusCode": 401,
+    "message": "Invalid client api token",
+    "error": "Unauthorized"
+}
+```
+
+- 400 Bad Request - Error during database initialization
+
+```json
+{
+    "statusCode": 400,
+    "message": "Error while initializing database: YourErrorMessage",
+    "error": "Bad Request"
+}
+```

@@ -13,3 +13,26 @@ Each bonus consist of a few simple fields:
 To create our custom events we simply need to navigate to `Database > Table Definitions` on the Back Office platform and create the event using the custom event modal.
 
 ![Create Custom Bonus](images/create-custom-bonus.gif)
+
+
+## Bonus callbacks
+
+Each brand have Api Url and Bonus Endpoint properties. The bonus requests are being sent to the endpoint made by concatenating those two properties. 
+
+### Bonus callback data example
+
+```json
+{
+        "userId": 553,
+        "name": "TEST_BONUS",
+        "value": 256,
+        "eventData": {
+            "name": "TEST_EVENT",
+            "value": 333
+        }
+}
+```
+
+The property eventData is only being included in the bonus callbacks if 'Send event data' option is enabled on the creating journey action screen. 
+
+![Create Custom Bonus](images/bonus_event_data.gif)

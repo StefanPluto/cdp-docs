@@ -27,7 +27,16 @@ The required data of an event consists of the following properties:
       "userId": "443",
       "name": "CHALLENGE_ENTERED",
       "value": 4000
-    }
+    },
+    {
+      "brandId": 1,
+      "userId": "443",
+      "name": "CHALLENGE_COMPLETED",
+      "value": {
+        "stringProp": "test",
+        "numberProp": 26
+      }
+    },
   ]
 }
 ```
@@ -35,3 +44,35 @@ The required data of an event consists of the following properties:
 - The data should be sent onto the `/client-data/event` using the POST method, 
 with the standard authorization mentioned at the start of the documentation.
 - As seen above the data object is an array of events, which means that you are able to either send one or more events at the same time.
+
+
+### Possible responses
+
+- 200 OK - Success
+
+```json
+{
+    "statusCode": 200,
+    "message": "Events received"
+}
+```
+
+- 401 Unauthorized 
+
+```json
+{
+    "statusCode": 401,
+    "message": "Invalid client api token",
+    "error": "Unauthorized"
+}
+```
+
+- 400 Bad Request
+
+```json
+{
+    "statusCode": 400,
+    "message": "Event reception failed: YourErrorMessage",
+    "error": "Bad Request"
+}
+```

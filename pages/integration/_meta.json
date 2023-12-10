@@ -4,11 +4,5 @@
   "custom-bonuses": "Custom Bonuses",
   "database-syncronization": "DB Synchronization",
   "sending-events": "Sending Events",
-  "sending-updates": "Sending Updates",
-  "init-db-tables": "Database initialization",
-  "init-db-event": "Ongoing database initialization",
-  "remove-tables": "Remove tables",
-  "remove-brand-tables": "Remove all uploaded brand tables",
-  "file-route": "File route",
-  "webhooks": "Webhooks"
+  "sending-updates": "Sending Updates"
 }
