@@ -26,12 +26,15 @@ Each brand have Api Url and Bonus Endpoint properties. The bonus requests are be
         "userId": 553,
         "name": "TEST_BONUS",
         "value": 256,
+        "uniqueBonusId": "6579a4fb4acf4b8915c4346c_553",
         "eventData": {
             "name": "TEST_EVENT",
             "value": 333
         }
 }
 ```
+
+By concatenating event trigger ID from our DB, underscore and user id, we get uniqueBonusId. This property can be used to prevent multiple bonuses triggering since it is unique for the journey event and user.  
 
 The property eventData is only being included in the bonus callbacks if 'Send event data' option is enabled on the creating journey action screen. 
 
