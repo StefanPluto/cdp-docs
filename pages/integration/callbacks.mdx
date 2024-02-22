@@ -3,6 +3,10 @@
 Every endpoint defined by client and configured on StopChurn should contain full endpoint route.
 Every callback contains "data" and "signature" field. All callback data is stored inside the "data" field, and the "signature" is being used for the <a href="https://stopchurn-docs.vercel.app/integration/callbacks#payload-signature" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', fontStyle: 'italic' }}>payload signature</a> purpose.
 
+## Already integrated clients
+
+We will be sending requests with and without payload signature until all clients implements payload signature on their end.
+
 ## Authorization
 
 Each endpoint comes with Authorization Header field as well, which will be directly copied to the Authorization header of callbacks. This enables you to configure different APIs with different authorization keys for different endpoints.
