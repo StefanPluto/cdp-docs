@@ -12,7 +12,7 @@ const config: DocsThemeConfig = {
     >
       <img
         style={{ width: "60px" }}
-        src="https://stopchurn.com/assets/logo.svg"
+        src="https://raffle-image-storage.s3.eu-central-1.amazonaws.com//ChurnStopLogo-removebg-preview.png"
       />
       <h2>StopChurn</h2>
     </div>
