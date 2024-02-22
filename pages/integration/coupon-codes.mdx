@@ -31,3 +31,25 @@ The coupon code "data" is consisted of:
 
 ```
 
+## Coupon Code callback responses
+
+The generated coupon code you want to include inside of notification template should be placed inside of "couponCodeValue" field of the callback response.
+
+### Valid Coupon Code callback response data examples
+
+```json
+{
+  "couponCodeValue": "BONUS25PERCENT11234"
+}
+
+```
+
+```json
+{
+  "dummyProperty1": "dummyValue1",
+  "couponCodeValue": "BONUS25PERCENT11234"
+  "dummyProperty2": 123
+}
+
+```
+
