@@ -128,35 +128,39 @@ The 'data' key should contain array of objects with 'brandId' and 'tableName' pr
 
 ### Triggering data sync
 
-Data sync for all JSON integration files can be triggered by sending GET method request to the /client-data/initialize-db route, with the standard authorization mentioned at the start of the documentation.
+Data sync for all JSON integration files is automatically triggered after receiving files. After the sync process is finished you will receive a POST callback on the Database Sync Status Endpoint (configured in Brand).
 
-### Possible responses for Triggering Data sync
+### Examples for Data sync status callback
 
-- 200 OK - Success
+- Successful database initialization
 
 ```json
 {
-    "statusCode": 200,
-    "message": "Successfully integrated client data!"
+    "status": 200,
 }
 ```
 
-- 401 Unauthorized - Error during database initialization
+- Error during database initialization
 
 ```json
 {
-    "statusCode": 401,
-    "message": "Invalid client api token",
-    "error": "Unauthorized"
+    "status": 400,
 }
 ```
 
-- 400 Bad Request - Error during database initialization
+### Integration Error Logs
+
+If you receive a callback which indicates that some errors have ocurred during database initialization, you can fetch error logs for the last database initialization by sending a request to the `/client-data/integration-errors` using the POST method, with the standard authorization mentioned at the start of the documentation. The response of this request should be an URL which leads to downloading the latest database initialization error logs. 
+
+## Synchronizing Brand IDs
+
+For each new brand on the Stop Churn platform you will receive a POST callback on the Brand Creation Endpoint (configured in Brand). This way you can map Stop Churn brands to the brands in your system.
+
+### Example for new Brand creation callback
 
 ```json
 {
-    "statusCode": 400,
-    "message": "Error while initializing database: YourErrorMessage",
-    "error": "Bad Request"
+    stopChurnBrandId: 15,
+    brandIdFromClient: "550e8400-e29b-41d4-a716-446655440000",
 }
 ```
