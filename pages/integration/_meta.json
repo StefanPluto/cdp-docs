@@ -1,8 +1,10 @@
 {
   "custom-tables": "Custom Tables",
   "custom-events": "Custom Events",
-  "custom-bonuses": "Custom Bonuses",
+  "callbacks": "Callbacks",
   "database-syncronization": "DB Synchronization",
   "sending-events": "Sending Events",
-  "sending-updates": "Sending Updates"
+  "sending-updates": "Sending Updates",
+  "custom-bonuses": "Custom Bonuses",
+  "coupon-codes": "Coupon Codes"
 }

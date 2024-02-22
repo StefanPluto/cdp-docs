@@ -129,38 +129,56 @@ The 'data' key should contain array of objects with 'brandId' and 'tableName' pr
 ### Triggering data sync
 
 Data sync for all JSON integration files is automatically triggered after receiving files. After the sync process is finished you will receive a POST callback on the Database Sync Status Endpoint (configured in Brand).
+The <a href="https://stopchurn-docs.vercel.app/integration/callbacks#payload-signature" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', fontStyle: 'italic' }}>payload signature</a> security method is implemented for every callback.
 
 ### Examples for Data sync status callback
+
+You can ignore the `timestamp` field since it is being used only for <a href="https://stopchurn-docs.vercel.app/integration/callbacks#payload-signature" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', fontStyle: 'italic' }}>payload signature</a> purposes.
 
 - Successful database initialization
 
 ```json
 {
+  "data": {
     "status": 200,
+    "timestamp": 1708611945206,
+  },
+  "signature": "0fb749acc842160125123723ff37b056fea599115bc077af8be1dee354db7aeafc3351ceb084ca30e2640257e0e8c370368a30d3aae2a3c88489039ed23709f7"
 }
+
 ```
 
 - Error during database initialization
 
 ```json
 {
+  "data": {
     "status": 400,
+    "timestamp": 1708611945206,
+  },
+  "signature": "53e05b09f711a54c15e2b1faa93f6fe19041b0f5fb1923d954ffbae974b2339eb5e7e5a352c45f05a70344a0bc4dcf3eda3b604450d049bec6cf40f2bdcb188f"
 }
+
 ```
 
 ### Integration Error Logs
 
-If you receive a callback which indicates that some errors have ocurred during database initialization, you can fetch error logs for the last database initialization by sending a request to the `/client-data/integration-errors` using the POST method, with the standard authorization mentioned at the start of the documentation. The response of this request should be an URL which leads to downloading the latest database initialization error logs. 
+If you receive a callback which indicates that some errors have ocurred during database initialization, you can fetch error logs for the last database initialization by sending a GET request to the `/client-data/integration-errors` using the POST method, with the standard authorization mentioned at the start of the documentation. The response of this request should be an URL which leads to downloading the latest database initialization error logs. 
 
 ## Synchronizing Brand IDs
 
-For each new brand on the Stop Churn platform you will receive a POST callback on the Brand Creation Endpoint (configured in Brand). This way you can map Stop Churn brands to the brands in your system.
+For each new brand on the StopChurn you will receive a POST callback on the Brand Creation Endpoint (configured in Brand). This way you can map StopChurn brands to the brands in your system.
+The <a href="https://stopchurn-docs.vercel.app/integration/callbacks#payload-signature" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', fontStyle: 'italic' }}>payload signature</a> security method is implemented for every callback.
 
 ### Example for new Brand creation callback
 
 ```json
 {
-    stopChurnBrandId: 15,
-    brandIdFromClient: "550e8400-e29b-41d4-a716-446655440000",
+  "data": {
+    "stopChurnBrandId": 15,
+    "brandIdFromClient": "550e8400-e29b-41d4-a716-446655440000",
+  },
+  "signature": "13056bc348df3d3f86fbea10e072ad01a25ecf39f5c2c9f3e05050a1f851e0e6ae8ee4a9153980da3922ff1ca0d722c5c42d714bc7f823684a26469314860b36"
 }
+
 ```
