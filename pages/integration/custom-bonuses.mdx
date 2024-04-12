@@ -41,6 +41,6 @@ The <a href="https://stopchurn-docs.vercel.app/integration/callbacks#payload-sig
 
 By concatenating event trigger ID from our DB, underscore and user id, we get uniqueBonusId. This property can be used to prevent multiple bonuses triggering since it is unique for the journey event and user.  
 
-The property eventData is only being included in the bonus callbacks if 'Send event data' option is enabled on the creating journey action screen. 
+Property eventData contains data of the event which triggered the bonus action. It's only being included in the bonus callbacks if 'Send event data' option is enabled on the edit journey action screen. 
 
 ![Create Custom Bonus](images/bonus_event_data.gif)

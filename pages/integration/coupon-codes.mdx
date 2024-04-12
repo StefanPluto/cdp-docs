@@ -24,12 +24,17 @@ The coupon code "data" is consisted of:
       "numberProp": 123,
       "dateProp": 1704063600000,
       "numberArrayProp": [10, 20, 30]
+    },
+    "eventData": {
+      "name": "TEST_EVENT",
+      "value": "test_value"
     }
   },
-  "signature": "e76ff7c60b30e74a370a6628c9844a0789af05aa3ee2b376baa0484eb505136da9902764eacc43cbf61908735a9408d77dd1c004a6b2ec4bb77e80c83c726877"
+  "signature": "141fca0172358297f8f92fc501f7cd789e218af74eff8ae01287c1e56a1aa4e1505c6705ad2e8c94c0688f62d1763677be173dcf7a70572830c3baa09d9a1801"
 }
 
 ```
+Property eventData contains data of the event which triggered the email action. It's only being included in the coupon code callbacks if 'Send event data' option is enabled while configuring Coupon Codes on the edit journey action screen. 
 
 ## Coupon Code callback responses
 
