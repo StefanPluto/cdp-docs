@@ -1,0 +1,140 @@
+# Brand API
+
+In order to interact with StopChurn Brands programmatically you can use Brand API endpoints. 
+
+## Brand creation endpoint
+
+Endpoint for creating a new StopChurn brand is `/brand/create`, the request method is POST and the authorization method is the standard one mentioned at the start of the documentation.
+
+The DTO for brand creation is consisted of:
+- `name` - Brand name. (required)
+- `email` - Support email for brand.
+- `url` - Brand page URL.
+- `cryptedEmailApiKey` - Sendgrid email API key. (required)
+- `cryptedSmsSidKey` - Twilio sms sid key.
+- `cryptedSmsApiKey` - Twilio sms api key.
+- `bonusEndpoint` - Client endpoint for bonus callbacks.
+- `cryptedBonusAuthorizationHeader` - Authorization header for bonus callbacks.
+- `couponCodeEndpoint` - Client endpoint for coupon code generation callbacks.
+- `cryptedCouponCodeAuthorizationHeader` - Authorization header for coupon code generation callbacks.
+- `fastLoyalEnabled` - This boolean enables/disables FastLoyal integration.
+- `cryptedFastLoyalApiToken` - FastLoyal api token. (required if FastLoyal is enabled)
+- `cryptedFastLoyalSecretKey` - FastLoyal secret key. (required if FastLoyal is enabled)
+- `dbSyncStatusEndpoint` - Client endpoint for status after DB sync callbacks.
+- `cryptedDbSyncStatusAuthorizationHeader` - Authorization header for DB sync status callbacks.
+- `brandCreationEndpoint` - Client endpoint for callbacks after brand creation.
+- `cryptedBrandCreationAuthorizationHeader` - Authorization header for callbacks after brand creation.
+- `brandIdFromClient` - Brand ID on the client side.
+- `emailDomains` - Allowed domains for this brand which could be used in email templates.
+- `defaultMarketingEmailPreferences` - Default email preference for new users, if it's missing from user creation DTO.
+- `defaultMarketingSmsPreferences` - Default sms preference for new users, if it's missing from user creation DTO.
+
+## Brand creation example
+
+Every field starting with "crypted" needs to be encrypted with `AES128` algorithm with the specified details:
+- `cypher mode` - CBC.
+- `cryptographic key and initialization vector (IV)` - Client secret string with '000000' in front of it. For example, if the client secret is "a1b2c3d4b5" (it's always string of length 10), the cryptographic key and initialization vector would be "000000a1b2c3d4b5".
+- `output text format` - Hex.
+- `ouput encoding` - UTF8.
+- `padding` - PKCS5Padding (default).
+
+### Brand creation payload example with client secret "a1b2c3d4b5"
+
+```json
+  {
+    "name": "test brand",
+    "email": "testBrand@gmail.com",
+    "url": "https://testbrand.com",
+    "cryptedEmailApiKey": "271896e8917804d05232797d845f72f1c1ecece74d8c2aa982a0de898c8e37de9e86af55cce47707b6eecfb39c020603",
+    "cryptedSmsSidKey": "271896e8917804d05232797d845f72f1c1ecece74d8c2aa982a0de898c8e37de9e86af55cce47707b6eecfb39c020603",
+    "cryptedSmsApiKey": "271896e8917804d05232797d845f72f1c1ecece74d8c2aa982a0de898c8e37de9e86af55cce47707b6eecfb39c020603",
+    "bonusEndpoint": "https://testbrand.com/bonus",
+    "cryptedBonusAuthorizationHeader": "271896e8917804d05232797d845f72f1c1ecece74d8c2aa982a0de898c8e37de9e86af55cce47707b6eecfb39c020603",
+    "couponCodeEndpoint": "https://testbrand.com/coupon-code",
+    "cryptedCouponCodeAuthorizationHeader": "5099200fca5304d1110f8c8b11194f7845867fa376553fc71e5e58ca2a40bf4f",
+    "fastLoyalEnabled": true,
+    "cryptedFastLoyalApiToken": "5099200fca5304d1110f8c8b11194f7845867fa376553fc71e5e58ca2a40bf4f",
+    "cryptedFastLoyalSecretKey": "5099200fca5304d1110f8c8b11194f7845867fa376553fc71e5e58ca2a40bf4f",
+    "dbSyncStatusEndpoint": "https://testbrand.com/db-sync-status",
+    "cryptedDbSyncStatusAuthorizationHeader": "5099200fca5304d1110f8c8b11194f7845867fa376553fc71e5e58ca2a40bf4f",
+    "brandCreationEndpoint": "https://testbrand.com/brand-creation",
+    "cryptedBrandCreationAuthorizationHeader": "5099200fca5304d1110f8c8b11194f7845867fa376553fc71e5e58ca2a40bf4f",
+    "brandIdFromClient": "sad21-1sd1s-1sd1d-d11s",
+    "emailDomains": [
+      "@167pluto.com"
+    ],
+  "defaultMarketingEmailPreferences": true,
+  "defaultMarketingSmsPreferences": true
+  }
+
+```
+
+### Brand creation payload example before encryption
+
+```json
+  {
+    "name": "test brand",
+    "email": "testBrand@gmail.com",
+    "url": "https://testbrand.com",
+    "cryptedEmailApiKey": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
+    "cryptedSmsSidKey": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
+    "cryptedSmsApiKey": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
+    "bonusEndpoint": "https://testbrand.com/bonus",
+    "cryptedBonusAuthorizationHeader": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
+    "couponCodeEndpoint": "https://testbrand.com/coupon-code",
+    "cryptedCouponCodeAuthorizationHeader": "Bearer asd0casdspasad",
+    "fastLoyalEnabled": true,
+    "cryptedFastLoyalApiToken": "Bearer asd0casdspasad",
+    "cryptedFastLoyalSecretKey": "Bearer asd0casdspasad",
+    "dbSyncStatusEndpoint": "https://testbrand.com/db-sync-status",
+    "cryptedDbSyncStatusAuthorizationHeader": "Bearer asd0casdspasad",
+    "brandCreationEndpoint": "https://testbrand.com/brand-creation",
+    "cryptedBrandCreationAuthorizationHeader": "Bearer asd0casdspasad",
+    "brandIdFromClient": "sad21-1sd1s-1sd1d-d11s",
+    "emailDomains": [
+      "@167pluto.com"
+    ],
+  "defaultMarketingEmailPreferences": true,
+  "defaultMarketingSmsPreferences": true
+  }
+
+```
+
+<a href="https://stopchurn-docs.vercel.app/integration/database-syncronization#example-for-new-brand-creation-callback" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', fontStyle: 'italic' }}>Brand creation callback</a> will be triggered only if you provide "brandCreationEndpoint" field.
+
+### Possible responses
+
+- 200 OK - Success
+
+```json
+{
+    "statusCode": 200,
+    "message": {
+      "brandIdFromClient": "sad21-1sd1s-1sd1d-d11s", // Brand ID provided in brand creation DTO
+      "newBrandId": 11 // Newly created Brand ID on StopChurn
+    }
+}
+```
+
+- 401 Unauthorized 
+
+```json
+{
+    "statusCode": 401,
+    "message": "Invalid client api token",
+    "error": "Unauthorized"
+}
+```
+
+- 400 Bad Request
+
+```json
+{
+    "statusCode": 400,
+    "message": {
+       "error": "Error during brand creation: <an error>",
+       "payloadDto": <Brand creation request payload>
+    },
+    "error": "Bad Request"
+}
+```
